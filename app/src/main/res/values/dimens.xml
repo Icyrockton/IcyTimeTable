@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="perCourseHeight">150dp</dimen>
+    <dimen name="paddingTop">40dp</dimen>
+    <dimen name="paddingLeft">40dp</dimen>
+    <dimen name="textSize">12sp</dimen>
+</resources>
