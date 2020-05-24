@@ -7,7 +7,7 @@ import android.view.View
 import androidx.core.view.children
 import androidx.recyclerview.widget.RecyclerView
 
-class IcyRowTimeInfoDecoration(
+abstract class IcyRowTimeInfoDecoration(
     private val width: Int,//宽度
     private val perCourseHeight: Int,// 每节课的高度
     private val textColor: Int,//字体颜色
@@ -43,7 +43,9 @@ class IcyRowTimeInfoDecoration(
                 break
             val top=topView.top+gap
             val bottom=top+perCourseHeight
+            c.drawTextAtTop(getStartTime(startRow),Rect(0,top,width,bottom),rowNumberPaint)
             c.drawTextAtCenter(startRow.toString(),Rect(0,top,width,bottom),rowNumberPaint)
+            c.drawTextAtBottom(getEndTime(startRow),Rect(0,top,width,bottom),rowNumberPaint)
             if (bottom > parent.height-parent.paddingBottom)
                 break
             startRow++
@@ -51,14 +53,8 @@ class IcyRowTimeInfoDecoration(
         }
     }
 
-    fun Canvas.drawTextAtCenter(text: String, rect: Rect, paint: Paint) {
-        val baseX = rect.centerX().toFloat() - paint.measureText(text) / 2f
-        val textBounds = Rect().apply { paint.getTextBounds(text, 0, text.length - 1, this) }
-        val baseY = rect.centerY() +
-                if (textBounds.height() != 0) textBounds.height() / 2f
-                else -(paint.fontMetrics.ascent + paint.fontMetrics.descent) / 2f
-        drawText(text, baseX, baseY, paint)
-    }
+    abstract fun getStartTime(rowNumber: Int):String  //课程开始时间
+    abstract fun getEndTime(rowNumber: Int):String  //课程结束时间
     private inline val View.layoutPosition
         get() = (layoutParams as RecyclerView.LayoutParams).viewLayoutPosition
 

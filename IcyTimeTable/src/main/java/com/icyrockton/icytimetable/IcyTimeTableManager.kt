@@ -74,10 +74,7 @@ class IcyTimeTableManager(
             resetData()
             return
         }
-        Log.d(
-            TAG,
-            "onLayoutChildren: $width $height $paddingLeft $paddingRight $paddingTop $paddingBottom $paddingStart $paddingEnd ${parentBottom.value} ${parentRight.value}"
-        )
+
         columnWidth = (width - paddingLeft - paddingRight) / columnCount
 
         calculateColumns()
@@ -134,6 +131,7 @@ class IcyTimeTableManager(
         val view = recycler.getViewForPosition(courseInfo.adapterPosition)//从recycler中获取view
         addView(view)
         measureChild(view, courseInfo)
+        
         val width = getDecoratedMeasuredWidth(view)
         val height = getDecoratedMeasuredHeight(view)
         val left = offsetX
@@ -146,20 +144,21 @@ class IcyTimeTableManager(
 
     private fun measureChild(view: View, courseInfo: CourseInfo) {
         val layoutParams = view.layoutParams as RecyclerView.LayoutParams
-        layoutParams.width = columnWidth // 宽
-        layoutParams.height = courseInfo.height() // 高
-
-        val insets = Rect().apply { calculateItemDecorationsForChild(view, this) }
+        layoutParams.width = columnWidth
+        layoutParams.height = courseInfo.height()
+        Log.d(TAG, "measureChild: ${layoutParams.leftMargin } ${layoutParams.rightMargin}")
+        //val insets = Rect().apply { calculateItemDecorationsForChild(view, this) }
         val widthSpec = getChildMeasureSpec(
-            width, widthMode, paddingLeft + paddingRight + insets.left + insets.right,
+            width, widthMode, paddingLeft + paddingRight   ,
             layoutParams.width,
-            true
+            canScrollHorizontally()
         )
         val heightSpec = getChildMeasureSpec(
-            height, heightMode, paddingTop + paddingBottom + insets.top + insets.bottom,
+            height, heightMode, paddingTop + paddingBottom  ,
             layoutParams.height,
-            true
+            canScrollVertically()
         )
+
         view.measure(widthSpec, heightSpec)
     }
 

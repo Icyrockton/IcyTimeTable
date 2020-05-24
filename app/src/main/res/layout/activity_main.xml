@@ -9,6 +9,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:id="@+id/recycler_view"
+        android:overScrollMode="never"
         android:paddingTop="@dimen/paddingTop"
         android:paddingLeft="@dimen/paddingLeft"
 

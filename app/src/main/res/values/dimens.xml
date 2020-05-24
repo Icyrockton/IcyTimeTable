@@ -2,7 +2,8 @@
 <resources>
 
     <dimen name="perCourseHeight">150dp</dimen>
-    <dimen name="paddingTop">40dp</dimen>
+    <dimen name="paddingTop">50dp</dimen>
     <dimen name="paddingLeft">40dp</dimen>
     <dimen name="textSize">12sp</dimen>
+    <dimen name="coursePadding">2dp</dimen>
 </resources>

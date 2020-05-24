@@ -31,7 +31,7 @@ class MainActivity : AppCompatActivity() {
 
         val adapter = GroupAdapter<GroupieViewHolder>()
         recycler_view.addItemDecoration(
-            IcyRowTimeInfoDecoration(
+            MyRowInfoDecoration(
                 resources.getDimensionPixelSize(R.dimen.paddingLeft),
                 resources.getDimensionPixelSize(R.dimen.perCourseHeight),
                 Color.BLACK,
@@ -43,7 +43,8 @@ class MainActivity : AppCompatActivity() {
             )
         )
         recycler_view.addItemDecoration(
-            IcyColInfoDecoration(columnCount,resources.getDimensionPixelSize(R.dimen.paddingTop),Color.BLACK,resources.getDimension(R.dimen.textSize))
+            MyColInfoDecoration(columnCount,resources.getDimensionPixelSize(R.dimen.paddingTop),Color.GRAY,Color.WHITE,Color.BLUE,
+                resources.getDimension(R.dimen.textSize))
         )
         recycler_view.layoutManager = IcyTimeTableManager(
             45,
